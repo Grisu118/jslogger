@@ -1,5 +1,7 @@
 # KotlinJS Logger
 
+[![Release](https://jitpack.io/v/Grisu118/jslogger.svg?style=flat-square)](https://jitpack.io/#Grisu118/jslogger)
+
 Simple Logger for KotlinJS
 
 ## Usage
