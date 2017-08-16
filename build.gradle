@@ -1,33 +1,67 @@
-group 'ch.grisu118.js'
-version '0.1'
-
 buildscript {
-    ext.kotlin_version = '1.1.4'
+  ext.kotlin_version = '1.1.4'
 
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+
+plugins {
+  id "com.jfrog.bintray" version "1.7.3"
 }
 
 apply plugin: 'kotlin2js'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group 'ch.grisu118.js'
+version '0.1.1'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+  compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
 }
 
 compileKotlin2Js {
-    kotlinOptions.metaInfo = true
-    kotlinOptions.outputFile= "${projectDir}/build/classes/main/jslogger.js"
-    kotlinOptions.sourceMap=true
-    kotlinOptions.moduleKind='commonjs'
+  kotlinOptions.metaInfo = true
+  kotlinOptions.outputFile = "${projectDir}/build/classes/main/jslogger.js"
+  kotlinOptions.sourceMap = true
+  kotlinOptions.moduleKind = 'commonjs'
 }
 
 jar.dependsOn compileKotlin2Js
+
+bintray {
+  user = project.property('bintrayUser')
+  key = project.property('bintrayApiKey')
+  publications = ['Bintray']
+  pkg {
+    repo = 'kotlin'
+    name = 'jslogger'
+    licenses = ['MIT']
+    vcsUrl = 'https://github.com/Grisu118/jslogger.git'
+    version {
+      name = project.version
+      desc = 'First Release'
+      released = new Date()
+      vcsTag = project.version
+    }
+  }
+}
+
+publishing {
+    publications {
+        Bintray(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId 'jslogger'
+            version project.version
+        }
+    }
+}
