@@ -32,10 +32,25 @@ compileKotlin2Js {
   kotlinOptions.metaInfo = true
   kotlinOptions.outputFile = "${projectDir}/build/classes/main/jslogger.js"
   kotlinOptions.sourceMap = true
-  kotlinOptions.moduleKind = 'commonjs'
+  kotlinOptions.moduleKind = 'umd'
 }
 
 jar.dependsOn compileKotlin2Js
+
+// custom tasks for creating source/javadoc jars
+task("sourcesJar", type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar
+}
+
+repositories {
+    jcenter()
+}
 
 bintray {
   user = project.property('bintrayUser')
@@ -62,6 +77,7 @@ publishing {
             groupId project.group
             artifactId 'jslogger'
             version project.version
+            artifact sourcesJar
         }
     }
 }
