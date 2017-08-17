@@ -1,6 +1,6 @@
 package ch.grisu118.js.logger
 
-class Logger(private val name: String, private val level: Level) : ILogger {
+class Logger(private val name: String, private var level: Level) : ILogger {
   override val isTrace: Boolean
     get() = level >= Level.TRACE
   override val isDebug: Boolean
@@ -70,6 +70,10 @@ class Logger(private val name: String, private val level: Level) : ILogger {
     if (isError) {
       console.error("$level [$name]: ", message, t)
     }
+  }
+
+  override fun levelUpdate(level: Level) {
+    this.level = level
   }
 
 }

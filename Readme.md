@@ -1,13 +1,12 @@
 # KotlinJS Logger
 
-[![Release](https://jitpack.io/v/Grisu118/jslogger.svg?style=flat-square)](https://jitpack.io/#Grisu118/jslogger)
 [ ![Release](https://api.bintray.com/packages/grisu118/kotlin/jslogger/images/download.svg) ](https://bintray.com/grisu118/kotlin/jslogger/_latestVersion)
 
 Simple Logger for KotlinJS
 
 ## Usage
 
-```kotlin
+````kotlin
 class XY {
   val logger = LoggerFactory.logger(this)
   
@@ -16,9 +15,9 @@ class XY {
     logger.info{ "Will be evaluated only if info or lower level is active" }
   }
 }
-```
+````
 
-### Loglevel
+### Available Loglevels
 * Trace
 * Debug
 * Info
@@ -28,5 +27,9 @@ class XY {
 
 ### Change Loglevel
 
-Call `LogFactory.loglevel(Regex(".*"), Level.DEBUG)` before creating the logger.
-The highest level from all matching levels is used!
+* `LoggerFactory.loglevel(Regex("XY"), Level.DEBUG)`
+  * you can set the loglevel for all loggers created after this call and matching the regex. 
+* `LoggerFactory.updateLevel(Regex("XY"), Level.TRACE)`
+  * in addition to the effect of the above method. All existing and matching loggers will change their level.
+  
+In both cases, the logger will use the highest level from all matching levels.
