@@ -1,13 +1,12 @@
 # KotlinJS Logger
 
-[![Release](https://jitpack.io/v/Grisu118/jslogger.svg?style=flat-square)](https://jitpack.io/#Grisu118/jslogger)
 [ ![Release](https://api.bintray.com/packages/grisu118/kotlin/jslogger/images/download.svg) ](https://bintray.com/grisu118/kotlin/jslogger/_latestVersion)
 
 Simple Logger for KotlinJS
 
 ## Usage
 
-```kotlin
+````kotlin
 class XY {
   val logger = LoggerFactory.logger(this)
   
@@ -16,7 +15,7 @@ class XY {
     logger.info{ "Will be evaluated only if info or lower level is active" }
   }
 }
-```
+````
 
 ### Loglevel
 * Trace

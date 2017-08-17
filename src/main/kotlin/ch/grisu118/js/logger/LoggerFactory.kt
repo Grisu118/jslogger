@@ -7,7 +7,7 @@ package ch.grisu118.js.logger
 object LoggerFactory {
 
   private val defaultLevel = Level.INFO
-  private val levels = mutableSetOf<Pair<Regex, Level>>()
+  private val levels = mutableMapOf<Regex, Level>()
   private val loggers = mutableMapOf<String, Logger>()
 
   /**
@@ -42,9 +42,22 @@ object LoggerFactory {
    * @param level the level for the associated loggers.
    */
   fun loglevel(regex: Regex, level: Level) {
-    levels.add(regex to level)
+    levels.put(regex, level)
   }
 
-  private fun level(name: String) = levels.filter { it.first.matches(name) }.maxBy { it.second }?.second ?: defaultLevel
+  /**
+   * Set the level for all loggers.
+   * If multiple regex matches, then the highest seen level is used.
+   * @param regex the regex to identify associated loggers.
+   * @param level the level for the associated loggers.
+   */
+  fun updateLevel(regex: Regex, level: Level) {
+    levels.put(regex, level)
+    loggers.forEach {
+      it.value.levelUpdate(LoggerFactory.level(it.key))
+    }
+  }
+
+  private fun level(name: String) = levels.filter { it.key.matches(name) }.maxBy { it.value }?.value ?: defaultLevel
 
 }

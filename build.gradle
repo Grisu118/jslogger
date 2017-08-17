@@ -18,7 +18,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group 'ch.grisu118.js'
-version '0.1.1'
+version '0.2.0'
 
 repositories {
   mavenCentral()

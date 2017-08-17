@@ -58,4 +58,9 @@ interface ILogger {
   fun error(t: Throwable, msg: () -> Any?) {
     if (isError) error(t, msg())
   }
+
+  /**
+   * Update the current loglevel for this logger.
+   */
+  fun levelUpdate(level: Level)
 }
