@@ -17,7 +17,7 @@ class XY {
 }
 ````
 
-### Loglevel
+### Available Loglevels
 * Trace
 * Debug
 * Info
@@ -27,5 +27,9 @@ class XY {
 
 ### Change Loglevel
 
-Call `LogFactory.loglevel(Regex(".*"), Level.DEBUG)` before creating the logger.
-The highest level from all matching levels is used!
+* `LoggerFactory.loglevel(Regex("XY"), Level.DEBUG)`
+  * you can set the loglevel for all loggers created after this call and matching the regex. 
+* `LoggerFactory.updateLevel(Regex("XY"), Level.TRACE)`
+  * in addition to the effect of the above method. All existing and matching loggers will change their level.
+  
+In both cases, the logger will use the highest level from all matching levels.
