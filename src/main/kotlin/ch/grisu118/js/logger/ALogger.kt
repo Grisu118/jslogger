@@ -1,7 +1,5 @@
 package ch.grisu118.js.logger
 
-import kotlin.reflect.KFunction1
-
 abstract class ALogger(protected val name: String, protected var level: Level) : ILogger {
   override val isTrace: Boolean
     get() = level >= Level.TRACE
@@ -15,8 +13,8 @@ abstract class ALogger(protected val name: String, protected var level: Level) :
     get() = level >= Level.ERROR
 
   protected fun log(level: Level, message: Any?) {
-    val msg = "$level [$name]: $message"
-    when(level) {
+    val msg = LoggerConfig.replace(level = level, message = message, name = name)
+    when (level) {
       Level.TRACE, Level.DEBUG -> console.log(msg)
       Level.INFO -> console.info(msg)
       Level.WARN -> console.warn(msg)
@@ -26,8 +24,8 @@ abstract class ALogger(protected val name: String, protected var level: Level) :
   }
 
   protected fun log(level: Level, message: Any?, t: Throwable) {
-    val msg = "$level [$name]: $message"
-    when(level) {
+    val msg = LoggerConfig.replace(level = level, message = message, name = name)
+    when (level) {
       Level.TRACE, Level.DEBUG -> console.log(msg, t)
       Level.INFO -> console.info(msg, t)
       Level.WARN -> console.warn(msg, t)
@@ -35,4 +33,5 @@ abstract class ALogger(protected val name: String, protected var level: Level) :
       else -> throw IllegalArgumentException("Invalid level $level")
     }
   }
+
 }
