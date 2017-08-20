@@ -4,61 +4,61 @@ class Logger(name: String, level: Level) : ALogger(name, level) {
 
   override fun trace(message: Any?) {
     if (isTrace) {
-      log(console::log, Level.TRACE, message)
+      log(Level.TRACE, message)
     }
   }
 
   override fun debug(message: Any?) {
     if (isDebug) {
-      log(console::log, Level.DEBUG, message)
+      log(Level.DEBUG, message)
     }
   }
 
   override fun info(message: Any?) {
     if (isInfo) {
-      log(console::info, Level.INFO, message)
+      log(Level.INFO, message)
     }
   }
 
   override fun warn(message: Any?) {
     if (isWarn) {
-      log(console::warn, Level.WARN, message)
+      log(Level.WARN, message)
     }
   }
 
   override fun error(message: Any?) {
     if (isError) {
-      log(console::error, Level.ERROR, message)
+      log(Level.ERROR, message)
     }
   }
 
   override fun trace(t: Throwable, message: Any?) {
     if (isTrace) {
-      log(console::log, Level.TRACE, message, t)
+      log(Level.TRACE, message, t)
     }
   }
 
   override fun debug(t: Throwable, message: Any?) {
     if (isDebug) {
-      log(console::log, Level.DEBUG, message, t)
+      log(Level.DEBUG, message, t)
     }
   }
 
   override fun info(t: Throwable, message: Any?) {
     if (isInfo) {
-      log(console::info, Level.INFO, message, t)
+      log(Level.INFO, message, t)
     }
   }
 
   override fun warn(t: Throwable, message: Any?) {
     if (isWarn) {
-      log(console::warn, Level.WARN, message, t)
+      log(Level.WARN, message, t)
     }
   }
 
   override fun error(t: Throwable, message: Any?) {
     if (isError) {
-      log(console::error, Level.ERROR, message, t)
+      log(Level.ERROR, message, t)
     }
   }
 
