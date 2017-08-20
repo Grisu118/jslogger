@@ -53,8 +53,8 @@ repositories {
 }
 
 bintray {
-  user = project.property('bintrayUser')
-  key = project.property('bintrayApiKey')
+  user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ""
+  key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey'): ""
   publications = ['Bintray']
   pkg {
     repo = 'kotlin'
