@@ -1,5 +1,5 @@
 buildscript {
-  ext.kotlin_version = '1.1.4'
+  ext.kotlin_version = '1.1.4-2'
 
   repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group 'ch.grisu118.js'
-version '0.2.0'
+version '0.3.0'
 
 repositories {
   mavenCentral()
@@ -53,8 +53,8 @@ repositories {
 }
 
 bintray {
-  user = project.property('bintrayUser')
-  key = project.property('bintrayApiKey')
+  user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ""
+  key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey'): ""
   publications = ['Bintray']
   pkg {
     repo = 'kotlin'
